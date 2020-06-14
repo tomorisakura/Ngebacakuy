@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Ngebacakuy</string>
+    <string name="title_activity_home">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="history_label">History</string>
+    <string name="action_label">Action</string>
+    <string name="comedy_label">Comedy</string>
+    <string name="teen_label">Teen</string>
+    <string name="romance_label">Romance</string>
+    <string name="horror_label">Horror</string>
+    <string name="crime_label">Crime</string>
+    <string name="detective_label">Detective</string>
+    <string name="war_label">War</string>
+    <string name="music_label">Musically</string>
+    <string name="exocrism_label">Exorcism</string>
+    <string name="thriller_label">Thrillers</string>
+    <string name="inspiration_label">Inspiration</string>
+    <string name="poetry_label">Poetry</string>
+    <string name="adult_label">Adult</string>
+    <string name="medical_label">Medical</string>
+    <string name="islami_label">Islamic</string>
+    <string name="literature_label">Literature</string>
+    <string name="novelist_label">Novelist</string>
+    <string name="fiksi_label">Fiksi</string>
+    <string name="category_label">Category</string>
+    <string name="uptodate_label">New Books</string>
+    <string name="description_label">Description</string>
+    <string name="about_label">About</string>
+</resources>

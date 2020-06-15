@@ -24,8 +24,10 @@
     <string name="literature_label">Literature</string>
     <string name="novelist_label">Novelist</string>
     <string name="fiksi_label">Fiksi</string>
-    <string name="category_label">Category</string>
-    <string name="uptodate_label">New Books</string>
-    <string name="description_label">Description</string>
-    <string name="about_label">About</string>
+    <string name="category_label">Genres</string>
+    <string name="uptodate_label">Buku Terbaru</string>
+    <string name="description_label">Sinopsis</string>
+    <string name="about_label">Writer</string>
+    <string name="reviews_label">Reviews</string>
+    <string name="baca_label">cabaca</string>
 </resources>

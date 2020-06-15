@@ -12,8 +12,10 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.google.gson.GsonBuilder
 import com.grepy.msx.ngebacakuy.constant.Constant
 import com.grepy.msx.ngebacakuy.model.Book
+import com.grepy.msx.ngebacakuy.model.Category
 import com.grepy.msx.ngebacakuy.repository.RemoteRepository
 import com.grepy.msx.ngebacakuy.repository.response.BookResponse
+import com.grepy.msx.ngebacakuy.repository.response.CategoryResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -24,12 +26,17 @@ import org.json.JSONObject
 class HomeViewModel : ViewModel(), RemoteRepository {
 
     private lateinit var bookResponse : BookResponse
+    private lateinit var categoryResponse: CategoryResponse
     private var newBook : MutableList<Book> = mutableListOf()
+    private var category : MutableList<Category> = mutableListOf()
     private var bookLiveData : MutableLiveData<MutableList<Book>> = MutableLiveData()
+    private var catLiveData : MutableLiveData<MutableList<Category>> = MutableLiveData()
 
     override suspend fun fetchDataUpToDate() {
         withContext(Dispatchers.IO) {
-            AndroidNetworking.get(Constant.BASE_URL_NEW_BOOK+Constant.HEADERS)
+            AndroidNetworking.get(Constant.BASE_URL_NEW_BOOK)
+                .addQueryParameter("limit", "7")
+                .addHeaders(Constant.X_HEADER, Constant.HEADERS)
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(object : JSONObjectRequestListener{
@@ -56,5 +63,37 @@ class HomeViewModel : ViewModel(), RemoteRepository {
             fetchDataUpToDate()
         }
         return bookLiveData
+    }
+
+    override suspend fun fetchCategory() {
+        withContext(Dispatchers.IO) {
+            AndroidNetworking.get(Constant.CATEGORY_ITEM)
+                .addHeaders("x-dreamfactory-api-key", Constant.HEADERS)
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(object : JSONObjectRequestListener{
+
+                    override fun onResponse(response: JSONObject?) {
+                        categoryResponse = GsonBuilder().create().fromJson(response.toString(), CategoryResponse::class.java)
+                        category.clear()
+                        categoryResponse.result.forEach {
+                            category.add(it)
+                        }
+                        catLiveData.postValue(category)
+                    }
+
+                    override fun onError(anError: ANError) {
+                        Log.d("Fail Category", anError.message.toString())
+                    }
+
+                })
+        }
+    }
+
+    override fun getCategory(): LiveData<MutableList<Category>> {
+        GlobalScope.launch(Dispatchers.IO) {
+            fetchCategory()
+        }
+        return catLiveData
     }
 }

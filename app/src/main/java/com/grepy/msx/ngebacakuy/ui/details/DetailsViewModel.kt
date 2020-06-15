@@ -31,7 +31,8 @@ class DetailsViewModel : ViewModel() {
 
     private suspend fun fetchDataDetails(query : Int) {
         withContext(Dispatchers.IO) {
-            AndroidNetworking.get(Constant.BOOK_DETAILS+query+"?api_key=${Constant.HEADERS}")
+            AndroidNetworking.get(Constant.BOOK_DETAILS+query)
+                .addHeaders(Constant.X_HEADER, Constant.HEADERS)
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(object : JSONObjectRequestListener{

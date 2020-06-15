@@ -1,5 +1,6 @@
 package com.grepy.msx.ngebacakuy.ui.details
 
+
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,10 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.grepy.msx.ngebacakuy.R
 import com.grepy.msx.ngebacakuy.constant.Constant
 import com.grepy.msx.ngebacakuy.model.Book
 import com.grepy.msx.ngebacakuy.model.Detail
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
@@ -19,15 +22,16 @@ class DetailsActivity : AppCompatActivity() {
         const val NEW_BOOK = "new_book"
     }
 
-    private lateinit var detailsViewModel: DetailsViewModel
+    private val detailsViewModel: DetailsViewModel by lazy { ViewModelProvider(this).get(DetailsViewModel::class.java) }
     private lateinit var relatedAdapter: RelatedAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         setSupportActionBar(toolbar_details)
-        collapsing_toolbar.setStatusBarScrimColor(Color.WHITE)
-        detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
+        collapsing_toolbar.setStatusBarScrimColor(Color.BLACK)
+        collapsing_toolbar.setExpandedTitleColor(Color.WHITE)
+        collapsing_toolbar.setCollapsedTitleTextColor(Color.WHITE)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         prepareData()
     }
@@ -47,8 +51,9 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun setDataByData(detail: Detail) {
-        var url  = "https://cabaca.id:8443/api/v2/files/${detail.coverUrl}&api_key=${Constant.HEADERS}"
-        Glide.with(this).load(url).into(details_thumbnail)
+        val url  = "https://cabaca.id:8443/api/v2/files/${detail.coverUrl}&api_key=${Constant.HEADERS}"
+        Glide.with(this).load(url).apply(RequestOptions.bitmapTransform(BlurTransformation(15,3))).into(details_thumbnail)
+        Glide.with(this).load(url).into(detail_thumb_mini)
         desc_detail.text = detail.desc
         penulis_name.text = detail.writerId.userByUser.name ?: "-"
         relatedAdapter = RelatedAdapter()

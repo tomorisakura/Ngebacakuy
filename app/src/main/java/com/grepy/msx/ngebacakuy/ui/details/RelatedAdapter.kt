@@ -21,11 +21,11 @@ class RelatedAdapter : RecyclerView.Adapter<RelatedAdapter.UserViewHolder>() {
     }
 
     inner class UserViewHolder(view : View) : RecyclerView.ViewHolder(view) {
-        fun bind(user: RelatedBook) {
+        fun bind(book: RelatedBook) {
             with(itemView) {
-                val url = "https://cabaca.id:8443/api/v2/files/${user.coverUrl}&api_key=${Constant.HEADERS}"
-                Glide.with(this.context).load(url).into(thumb_user)
-                user_name.text = user.title
+                val url = "https://cabaca.id:8443/api/v2/files/${book.coverUrl}&api_key=${Constant.HEADERS}"
+                Glide.with(this.context).load(url).into(thumb_related)
+                tv_name.text = book.title
             }
         }
     }

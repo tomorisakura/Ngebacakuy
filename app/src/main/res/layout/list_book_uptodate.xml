@@ -26,15 +26,55 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_launcher_foreground" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:padding="3dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_baseline_star_24" />
+
+                <TextView
+                    android:id="@+id/tv_rate"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    tools:text="@string/novelist_label" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/book_name_list"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textSize="16sp"
+                android:lines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/thumb_book"
                 tools:text="@string/novelist_label" />
+
+            <TextView
+                android:id="@+id/tv_penulis"
+                android:layout_width="0dp"
+                android:layout_marginStart="5dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintTop_toBottomOf="@+id/book_name_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="hello karma"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

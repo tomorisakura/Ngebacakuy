@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.grepy.msx.ngebacakuy.OnItemClicked
+import com.grepy.msx.ngebacakuy.utils.OnItemClicked
 import com.grepy.msx.ngebacakuy.R
 import com.grepy.msx.ngebacakuy.constant.Constant
 import com.grepy.msx.ngebacakuy.model.Book
@@ -32,6 +32,8 @@ class UptodateBookAdapter : RecyclerView.Adapter<UptodateBookAdapter.UptodateBoo
                 val url = "https://cabaca.id:8443/api/v2/files/${book.coverUrl}&api_key=${Constant.HEADERS}"
                 Glide.with(this.context).load(url).into(thumb_book)
                 book_name_list.text = book.titleBook
+                tv_penulis.text = book.writerByWriterId.userByUser.name
+                tv_rate.text = book.rateSum.toString()
                 itemView.setOnClickListener { onItemCliced?.itemClicked(book) }
             }
         }
